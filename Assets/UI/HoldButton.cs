@@ -26,12 +26,10 @@ public class HoldButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         if(isPressed)
         {
             unityEventDown.Invoke();
-            Debug.Log("pressed");
         }
         else
         {
             unityEventUp.Invoke();
-            Debug.Log("un-pressed");
         }
     }
 }

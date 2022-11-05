@@ -35,41 +35,46 @@ public class CarAI : MonoBehaviour
 
         transform.position = startingPos.transform.position;
         currPos = startingPos;
+
+        SetNextTarget();
     }
 
     private void Start()
-    {
-        Invoke("SetNextTarget",0.5f);
-        SetNextTarget();
+    {      
         SnapToTarget();
     }
 
     private void Update()
     {
-        RotateToTarget();
         if (!DetectCarInfront() && isFacingTargetFirstTime)
         {
             ProcessMovement();
         }
+        RotateToTarget();
 
     }
 
     private bool DetectCarInfront()
     {
         Vector3 dir = nextTarget.transform.position - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(careye.position, dir, rayCarRange, carAILayer);
-        Debug.DrawRay(careye.position, dir);
+        //RaycastHit2D hit = Physics2D.Raycast(careye.position, dir, rayCarRange, carAILayer);
+        RaycastHit2D hit = Physics2D.BoxCast(careye.transform.position, new Vector2(1f, 0.5f), 0f, transform.up, rayCarRange, carAILayer);
+       // Debug.DrawRay(careye.position, dir);
+        //Debug.Log(hit.collider);
         if (hit.collider != null)
         {
             return true;
         }
-
         else
         {
             return false;
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(careye.position, new Vector3(2f,1f,0f));
+    }
 
     void RotateToTarget()
     {

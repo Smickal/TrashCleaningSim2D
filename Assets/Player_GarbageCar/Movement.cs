@@ -27,9 +27,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GetKeyBoardMovement();
-        GetButtonVerticalMovement();
-        GetButtonHorizontalMovement();
+        GetKeyBoardMovement();
+        //GetButtonVerticalMovement();
+        //GetButtonHorizontalMovement();
 
 
         ProcessMovement();
