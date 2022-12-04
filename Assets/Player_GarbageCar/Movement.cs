@@ -11,8 +11,10 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotationSpeed;
 
     Rigidbody2D rb;
+    FuelSystem fuelSystem;
 
     bool isMoving = false;
+    bool isFuelEmpty = false;
 
     float verticalAxis;
     float horizontalAxis;
@@ -23,18 +25,23 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        fuelSystem = GetComponent<FuelSystem>();
     }
     // Update is called once per frame
     void Update()
     {
         GetKeyBoardMovement();
-        //GetButtonVerticalMovement();
-        //GetButtonHorizontalMovement();
+       // GetButtonVerticalMovement();
+       // GetButtonHorizontalMovement();
 
-
-        ProcessMovement();
+        if(!isFuelEmpty)
+        {
+            ProcessMovement();
+        }
+        ProcessFuelSystem();
 
     }
+
 
     private void GetKeyBoardMovement()
     {
@@ -99,13 +106,21 @@ public class Movement : MonoBehaviour
 
     void CheckIfCarMoving(float movementValue)
     {
-        if (movementValue > 0f)
+        if (movementValue != 0f)
         {
             isMoving = true;
         }
         else
         {
             isMoving = false;
+        }
+    }
+
+    private void ProcessFuelSystem()
+    {
+        if(isMoving)
+        {
+            fuelSystem.DecreaseFuel();
         }
     }
 
@@ -155,4 +170,9 @@ public class Movement : MonoBehaviour
         isrightPressed = false;
     }
 
+    
+    public void IsFuelEmpty(bool value)
+    {
+        isFuelEmpty = value;
+    }
 }

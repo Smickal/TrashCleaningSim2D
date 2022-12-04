@@ -10,11 +10,7 @@ public class GarbageCounter : MonoBehaviour
     [SerializeField] TextMeshProUGUI counterText;
 
     int maxDump;
-
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     public void StartUp(int maxDump)

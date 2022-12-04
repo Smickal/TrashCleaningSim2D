@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Garbage : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     GarbageSpawnerSystem GarbageSpawnerSystem;
+
 
     private void Awake()
     {
@@ -18,4 +20,5 @@ public class Garbage : MonoBehaviour
         GarbageSpawnerSystem.DecreaseSpawnedGarbage(transform);
         Destroy(gameObject);
     }
+
 }

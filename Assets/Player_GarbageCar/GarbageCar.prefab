@@ -363,11 +363,12 @@ GameObject:
   - component: {fileID: 5164997665945803716}
   - component: {fileID: 2590893151424685123}
   - component: {fileID: 3674674278701338975}
+  - component: {fileID: 5361747821969533011}
   - component: {fileID: 8961866596187520467}
   - component: {fileID: 3118511648336564379}
   m_Layer: 3
   m_Name: GarbageCar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -426,6 +427,22 @@ MonoBehaviour:
     m_Bits: 128
   takinIndicator: {fileID: 880401156}
   fillImage: {fileID: 231919707}
+--- !u!114 &5361747821969533011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164997665945803717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50c327d76a2a5f4fb67a6db019a9974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelDisplay: {fileID: 0}
+  maxFuel: 20
+  decreaseRate: 2
+  blinkThreshold: 0.3
 --- !u!50 &8961866596187520467
 Rigidbody2D:
   serializedVersion: 4

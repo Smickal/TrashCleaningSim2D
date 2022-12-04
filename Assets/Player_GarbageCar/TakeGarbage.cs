@@ -10,21 +10,25 @@ public class TakeGarbage : MonoBehaviour
     [SerializeField] int maxDump = 10;
     [SerializeField] float collectRange = 1f;
     [SerializeField] float maxPressTime = 2f;
-
-    [Header("LayerMask")]
-    [SerializeField] LayerMask garbageLayer;
+    [SerializeField] int trashMoneyValue = 5;
 
     [Header("Initialization")]
     [SerializeField] GameObject takinIndicator;
     [SerializeField] Image fillImage;
+    [SerializeField] Button takeTrashButton;
+    [SerializeField] LayerMask garbageLayer;
 
     GarbageCounter garbageCounter;
+    EconomySystem economySystem;
     float curPressTime = 0f;
     int currentDump;
+
+
 
     private void Awake()
     {
         garbageCounter = FindObjectOfType<GarbageCounter>();
+        economySystem = FindObjectOfType<EconomySystem>();
     }
 
 
@@ -41,6 +45,7 @@ public class TakeGarbage : MonoBehaviour
         {
             ProccessInput();
         }
+        CheckTrash();
         TakeTrash();
     }
 
@@ -70,10 +75,12 @@ public class TakeGarbage : MonoBehaviour
         if(col != null)
         {
             takinIndicator.transform.position = col.transform.position;
+            takeTrashButton.gameObject.SetActive(true);
             return true;
         }
         else
         {
+            takeTrashButton.gameObject.SetActive(false);
             return false;
         }
     }
@@ -85,6 +92,7 @@ public class TakeGarbage : MonoBehaviour
             Collider2D col = Physics2D.OverlapCircle(transform.position, collectRange, garbageLayer);
             col.GetComponent<Garbage>().TakeTrash();
             currentDump++;
+            economySystem.AddMoney(trashMoneyValue);
             garbageCounter.UpdateText(currentDump);
             curPressTime = 0f;
         }

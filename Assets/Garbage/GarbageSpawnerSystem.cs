@@ -8,6 +8,7 @@ public class GarbageSpawnerSystem : MonoBehaviour
     [SerializeField]  int maxGarbageSpawned;
     [SerializeField] GameObject trash;
 
+
     Transform[] spawnPosition;
 
     int[] spawnLocNote;
@@ -40,7 +41,7 @@ public class GarbageSpawnerSystem : MonoBehaviour
             }
             while (IsThatPlaceTaken(ranIdx));
 
-            Instantiate(trash, spawnPosition[ranIdx].transform.position, Quaternion.identity, spawnPosition[ranIdx]);
+            GameObject trashObj =  Instantiate(trash, spawnPosition[ranIdx].transform.position, Quaternion.identity, spawnPosition[ranIdx]);
             spawnLocNote[ranIdx] = 1;
             currSpawned++;
         }

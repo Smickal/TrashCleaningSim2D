@@ -10,6 +10,12 @@ public class HoldButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     public UnityEvent unityEventUp;
 
     bool isPressed = false;
+
+    private void OnEnable()
+    {
+        isPressed = false;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {       
         isPressed = true;        
