@@ -23,8 +23,10 @@ public class FuelSystem : MonoBehaviour
     [SerializeField] Button refuelButton;
     [SerializeField] LayerMask gasStationMask;
     [SerializeField] TextMeshProUGUI RefuelCostText;
+    [SerializeField] PopUpController outOfFuelPop;
 
     float currentFuel;
+    bool isTrigger = false;
     GasStation gasStation;
     EconomySystem economySystem;
     Movement movement;
@@ -76,20 +78,23 @@ public class FuelSystem : MonoBehaviour
             rotateToNearest.ActivateArrowIndicator();
         }
 
-        if(currentFuel <= 0f)
+        if(currentFuel <= 0f && !isTrigger)
         {
             movement.IsFuelEmpty(true);
+            outOfFuelPop.TriggerFadeIn();
+            isTrigger = true;
         }
     }
 
     public void RefillFuel()
     {
-        currentFuel = maxFuel;
         economySystem.DecreaseMoney(fuelPrice);
+        currentFuel = maxFuel;
         fuelDisplay.SetFuelSlider(currentFuel, maxFuel);
         rotateToNearest.DeActivateArrowIndicator();
         fuelDisplay.ActivateBlinking(false);
         movement.IsFuelEmpty(false);
+        isTrigger = false;
     }
 
     public void TeleportToTheNearestGasStation()
@@ -106,8 +111,14 @@ public class FuelSystem : MonoBehaviour
             }
         }
 
-        transform.position = closestGasStation.transform.position;
-        transform.rotation = closestGasStation.transform.rotation;
-    }
+        transform.position = closestGasStation.GetComponent<GasStation>().SpawnPoint.position;
+        transform.rotation = closestGasStation.GetComponent<GasStation>().SpawnPoint.rotation;
 
+        RefillFuel();
+    }
+       
+    public int GetFuelCost()
+    {
+        return fuelPrice;
+    }
 }

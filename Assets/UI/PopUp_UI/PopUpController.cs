@@ -9,7 +9,11 @@ public class PopUpController : MonoBehaviour
     [SerializeField] GameObject popUpPrefab;
     [SerializeField] float fadeTime = 0.2f;
 
-    
+    private void Start()
+    {
+        DisableContainer();
+    }
+
 
     public void TriggerFadeOut()
     {
