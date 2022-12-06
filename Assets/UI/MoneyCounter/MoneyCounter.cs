@@ -12,6 +12,8 @@ public class MoneyCounter : MonoBehaviour
 
     // Update is called once per frame
 
+    
+
     public void UpdateText(int value)
     {
         moneyText.text = "$" + value.ToString();

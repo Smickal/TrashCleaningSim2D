@@ -29,4 +29,9 @@ public class GameManager : MonoBehaviour
         int totalCost = retryCost + fuelSystem.GetFuelCost();
         RetryCostText.text = "$"+totalCost.ToString();
     }
+
+    public int GetRetryCost()
+    {
+        return retryCost;
+    }
 }

@@ -23,6 +23,7 @@ public class FuelSystem : MonoBehaviour
     [SerializeField] Button refuelButton;
     [SerializeField] LayerMask gasStationMask;
     [SerializeField] TextMeshProUGUI RefuelCostText;
+    [SerializeField] PopUpController refuelControllerPop;
     [SerializeField] PopUpController outOfFuelPop;
 
     float currentFuel;
@@ -31,12 +32,14 @@ public class FuelSystem : MonoBehaviour
     EconomySystem economySystem;
     Movement movement;
     RotateToNearest rotateToNearest;
+    GameManager gameManager;
 
     private void Awake()
     {
         economySystem = FindObjectOfType<EconomySystem>();
         rotateToNearest = FindObjectOfType<RotateToNearest>();
         movement = GetComponent<Movement>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Start()
@@ -88,17 +91,43 @@ public class FuelSystem : MonoBehaviour
 
     public void RefillFuel()
     {
-        economySystem.DecreaseMoney(fuelPrice);
+        if (!economySystem.DecreaseMoney(fuelPrice))
+            return;
+        
         currentFuel = maxFuel;
         fuelDisplay.SetFuelSlider(currentFuel, maxFuel);
         rotateToNearest.DeActivateArrowIndicator();
         fuelDisplay.ActivateBlinking(false);
         movement.IsFuelEmpty(false);
+        refuelControllerPop.TriggerFadeOut();
+        isTrigger = false;
+    }
+
+    public void RefillFuel(int value)
+    {
+        if (!economySystem.DecreaseMoney(value))
+            return;
+
+        currentFuel = maxFuel;
+        fuelDisplay.SetFuelSlider(currentFuel, maxFuel);
+        rotateToNearest.DeActivateArrowIndicator();
+        fuelDisplay.ActivateBlinking(false);
+        movement.IsFuelEmpty(false);
+        refuelControllerPop.TriggerFadeOut();
         isTrigger = false;
     }
 
     public void TeleportToTheNearestGasStation()
     {
+        int totalDerekValue = fuelPrice + gameManager.GetRetryCost();
+
+        if (!economySystem.IsMoneyEnough(totalDerekValue))
+        {   
+            return;
+        }
+        RefillFuel(totalDerekValue);
+        
+
         GameObject[] gasStations = GameObject.FindGameObjectsWithTag("Gas Station");
         GameObject closestGasStation = gasStations[0];
 
@@ -114,7 +143,7 @@ public class FuelSystem : MonoBehaviour
         transform.position = closestGasStation.GetComponent<GasStation>().SpawnPoint.position;
         transform.rotation = closestGasStation.GetComponent<GasStation>().SpawnPoint.rotation;
 
-        RefillFuel();
+        outOfFuelPop.TriggerFadeOut();
     }
        
     public int GetFuelCost()
