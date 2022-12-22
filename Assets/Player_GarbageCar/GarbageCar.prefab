@@ -422,11 +422,13 @@ MonoBehaviour:
   maxDump: 10
   collectRange: 2.5
   maxPressTime: 2
+  trashMoneyValue: 5
+  takinIndicator: {fileID: 880401156}
+  fillImage: {fileID: 231919707}
+  takeTrashButton: {fileID: 0}
   garbageLayer:
     serializedVersion: 2
     m_Bits: 128
-  takinIndicator: {fileID: 880401156}
-  fillImage: {fileID: 231919707}
 --- !u!114 &5361747821969533011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,9 +442,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelDisplay: {fileID: 0}
+  fuelPrice: 200
   maxFuel: 20
   decreaseRate: 2
+  fuelDetectRange: 2.5
   blinkThreshold: 0.3
+  refuelButton: {fileID: 0}
+  gasStationMask:
+    serializedVersion: 2
+    m_Bits: 0
+  refuelControllerPop: {fileID: 0}
+  RefuelCostText: {fileID: 0}
+  outOfFuelPop: {fileID: 0}
+  retryCostText: {fileID: 0}
 --- !u!50 &8961866596187520467
 Rigidbody2D:
   serializedVersion: 4

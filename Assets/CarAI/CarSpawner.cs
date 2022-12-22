@@ -7,13 +7,28 @@ public class CarSpawner : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] int carSize = 10;
     [SerializeField] GameObject car;
-    void Start()
+    
+    List<GameObject> cars = new List<GameObject>();
+
+    int carsSpawned = 0;
+
+    public void SpawnTrafficCar()
     {
-        for(int i = 0; i <carSize; i++)
+        for (int i = 0; i < carSize; i++)
         {
-            Instantiate(car, transform);
+            GameObject newObj =  Instantiate(car, transform);
+            cars.Add(newObj);
+            carsSpawned++;
         }
     }
 
- 
+    public void DespawnCar()
+    {
+        for (int i = 0; i < carsSpawned; i++)
+        {
+            Destroy(cars[i]);
+        }
+        cars.Clear();
+        carsSpawned = 0;
+    }
 }

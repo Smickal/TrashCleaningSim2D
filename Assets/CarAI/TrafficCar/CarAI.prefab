@@ -148,8 +148,11 @@ MonoBehaviour:
   speed: 20
   rotationSpeed: 20
   rayCarRange: 0.1
+  carCollider: {fileID: 1533575128653797315}
+  careye: {fileID: 4761822626847568984}
   carAILayer:
     serializedVersion: 2
     m_Bits: 72
-  carCollider: {fileID: 1533575128653797315}
-  careye: {fileID: 4761822626847568984}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8

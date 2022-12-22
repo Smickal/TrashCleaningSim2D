@@ -10,8 +10,16 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
 
+
+    [Header("Initialization")]
+    [SerializeField] PopUpController repairController;
+
+
+
     Rigidbody2D rb;
     FuelSystem fuelSystem;
+    GameManager gameManager;
+    EconomySystem economySystem;
 
     bool isMoving = false;
     bool isFuelEmpty = false;
@@ -24,6 +32,9 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        economySystem = FindObjectOfType<EconomySystem>();
+
         rb = GetComponent<Rigidbody2D>();
         fuelSystem = GetComponent<FuelSystem>();
     }
@@ -41,6 +52,8 @@ public class Movement : MonoBehaviour
         ProcessFuelSystem();
 
     }
+
+    
 
 
     private void GetKeyBoardMovement()
@@ -102,7 +115,34 @@ public class Movement : MonoBehaviour
     }
 
 
+    public void TeleportToTheNearestRepairStation()
+    {
+        int totalDerekValue = gameManager.GetRepairCost();
 
+        if (!economySystem.IsMoneyEnough(totalDerekValue))
+        {
+            return;
+        }
+        fuelSystem.RefillFuel(totalDerekValue);
+
+
+        GameObject[] repairStations = GameObject.FindGameObjectsWithTag("Repair Station");
+        GameObject closestRepairStations = repairStations[0];
+
+        foreach (GameObject gasStation in repairStations)
+        {
+            if (Vector2.Distance(closestRepairStations.transform.position, transform.position) >
+                Vector2.Distance(gasStation.transform.position, transform.position))
+            {
+                closestRepairStations = gasStation;
+            }
+        }
+
+        transform.position = closestRepairStations.GetComponent<RepairStation>().SpawnPoint.position;
+        transform.rotation = closestRepairStations.GetComponent<RepairStation>().SpawnPoint.rotation;
+
+        repairController.TriggerFadeOut();
+    }
 
     void CheckIfCarMoving(float movementValue)
     {
@@ -175,4 +215,12 @@ public class Movement : MonoBehaviour
     {
         isFuelEmpty = value;
     }
+
+
+    public void TriggerPopOutRepair()
+    {
+        repairController.TriggerFadeIn();
+    }
+
+
 }

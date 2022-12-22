@@ -22,9 +22,10 @@ public class FuelSystem : MonoBehaviour
     [Header("Inizialization")]
     [SerializeField] Button refuelButton;
     [SerializeField] LayerMask gasStationMask;
-    [SerializeField] TextMeshProUGUI RefuelCostText;
     [SerializeField] PopUpController refuelControllerPop;
+    [SerializeField] TextMeshProUGUI RefuelCostText;
     [SerializeField] PopUpController outOfFuelPop;
+    [SerializeField] TextMeshProUGUI retryCostText;
 
     float currentFuel;
     bool isTrigger = false;
@@ -36,10 +37,10 @@ public class FuelSystem : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         economySystem = FindObjectOfType<EconomySystem>();
         rotateToNearest = FindObjectOfType<RotateToNearest>();
         movement = GetComponent<Movement>();
-        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Start()
@@ -149,5 +150,10 @@ public class FuelSystem : MonoBehaviour
     public int GetFuelCost()
     {
         return fuelPrice;
+    }
+
+    public void SetFuelPrice(int value)
+    {
+        fuelPrice = value;
     }
 }

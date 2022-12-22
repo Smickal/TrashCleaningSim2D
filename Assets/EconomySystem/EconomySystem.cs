@@ -52,4 +52,16 @@ public class EconomySystem : MonoBehaviour
         else
             return true;
     }
+
+
+    public void SetMoneyValue(int value)
+    {
+        playerMoney = value;
+    }
+
+
+    public int GetMoneyValue()
+    {
+        return playerMoney;
+    }
 }

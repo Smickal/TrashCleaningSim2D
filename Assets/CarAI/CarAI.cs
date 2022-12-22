@@ -14,9 +14,9 @@ public class CarAI : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed = 20f;
     [SerializeField] float rayCarRange = 1f;
-    [SerializeField] LayerMask carAILayer;
-    [SerializeField] BoxCollider2D carCollider;
     [SerializeField] Transform careye; 
+    [SerializeField] LayerMask carAILayer;
+    [SerializeField] LayerMask playerLayerMask;
     WaypointManager waypointManager;
     Waypoint startingPos;
     Waypoint currPos;
@@ -28,6 +28,18 @@ public class CarAI : MonoBehaviour
     public bool Move { get { return move; } set { move = value; } }
 
     float targetAngle;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Movement>().TriggerPopOutRepair();
+            Debug.Log("HIT PLAYER");
+        }
+
+    }
+
+
     private void Awake()
     {
         waypointManager = FindObjectOfType<WaypointManager>();
