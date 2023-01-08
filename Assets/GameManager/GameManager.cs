@@ -112,4 +112,57 @@ public class GameManager : MonoBehaviour
     {
         return repairCost;
     }
+
+    public int GetLevelCost(int value)
+    {
+        switch(value)
+        {
+            case 1:
+                return level1Price;
+
+            case 2:
+                return level2Price;
+
+            case 3:
+                return level3Price;
+        }
+
+        return 0;
+    }
+
+    public void ActivateLevel(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                isLevel1Unlocked = true;
+                break;
+
+            case 2:
+                isLevel1Unlocked = true;
+                break;
+
+            case 3:
+                isLevel1Unlocked = true;
+                break;
+        }
+
+    }
+
+    public bool CheckLevel(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                return isLevel1Unlocked;
+
+            case 2:
+                return isLevel2Unlocked;
+
+            case 3:
+                return isLevel3Unlocked;
+        }
+
+        return false;
+    }
 }

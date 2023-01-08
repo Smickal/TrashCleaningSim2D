@@ -41,7 +41,7 @@ public class SwipeMenu : MonoBehaviour
 
             }
         }
-
+        
     }
 
     public void Next()
@@ -60,5 +60,10 @@ public class SwipeMenu : MonoBehaviour
             posisi--;
             scrollPos = pos[posisi];
         }
+    }
+
+    public int GetCurrentLevel()
+    {
+        return posisi;
     }
 }
