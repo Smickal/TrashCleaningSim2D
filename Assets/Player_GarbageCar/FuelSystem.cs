@@ -103,6 +103,7 @@ public class FuelSystem : MonoBehaviour
         refuelControllerPop.TriggerFadeOut();
         isTrigger = false;
     }
+    
 
     public void RefillFuel(int value)
     {
@@ -155,5 +156,10 @@ public class FuelSystem : MonoBehaviour
     public void SetFuelPrice(int value)
     {
         fuelPrice = value;
+    }
+
+    public void SetMaxFuel(float value)
+    {
+        maxFuel = value;
     }
 }

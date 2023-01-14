@@ -222,5 +222,8 @@ public class Movement : MonoBehaviour
         repairController.TriggerFadeIn();
     }
 
-
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
 }

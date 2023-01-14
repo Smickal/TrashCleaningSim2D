@@ -7,6 +7,7 @@ TagManager:
   - Gas Station
   - Repair Station
   - Wall
+  - Trash Station
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - Gas Station
   - Repair Station
   - Wall
-  - 
-  - 
-  - 
+  - Trash Station
+  - Canvas
+  - Trash Can
   - 
   - 
   - 

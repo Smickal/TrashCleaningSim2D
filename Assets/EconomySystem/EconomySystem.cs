@@ -5,21 +5,24 @@ using UnityEngine;
 public class EconomySystem : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] int playerMoney = 100000;
 
+    int playerMoney;
 
     [Header("Error_Initialization")]
     [SerializeField] ErrorObjectPooling cashNotEnoughError;
-    MoneyCounter moneyCounter;
 
+    [SerializeField] MoneyCounter moneyCounter;
+    GameManager gameManager;
     private void Awake()
     {
-        moneyCounter = FindObjectOfType<MoneyCounter>();
+        if(!moneyCounter) moneyCounter = FindObjectOfType<MoneyCounter>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
 
     private void Start()
     {
+        playerMoney = gameManager.GetPlayerMoney();
         moneyCounter.UpdateText(playerMoney);
     }
 
@@ -27,8 +30,7 @@ public class EconomySystem : MonoBehaviour
     public bool DecreaseMoney(int value)
     {
         if (!IsMoneyEnough(value))
-        {
-            
+        {           
             return false;
         }
         playerMoney -= value;

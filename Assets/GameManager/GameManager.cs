@@ -28,16 +28,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] int level1Price = 0;
     [SerializeField] bool isLevel2Unlocked = false;
     [SerializeField] int level2Price = 1500;
-    [SerializeField] bool isLevel3Unlocked = false;
-    [SerializeField] int level3Price = 3000;
+    [SerializeField] bool isLevel3Unlocked = true;
+    [SerializeField] int level3Price = 1500;
 
-
+    [Header("Truck Stat")]
+    [SerializeField] float truckSpeed = 10f;
+    [SerializeField] float truckFuel = 100f;
+    [SerializeField] int truckMaxCapacity = 10;
+    [SerializeField] float truckCollectRate = 2f;
 
     int currentDayMoney;
 
-    
 
 
+   
 
     private void Awake()
     {
@@ -55,16 +59,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-
     }
-
-    private void Start()
-    {
-
-
-    }
-
-
 
     public int GetRetryCost()
     {
@@ -125,6 +120,9 @@ public class GameManager : MonoBehaviour
 
             case 3:
                 return level3Price;
+
+            default:
+                break;
         }
 
         return 0;
@@ -139,11 +137,14 @@ public class GameManager : MonoBehaviour
                 break;
 
             case 2:
-                isLevel1Unlocked = true;
+                isLevel2Unlocked = true;
                 break;
 
             case 3:
-                isLevel1Unlocked = true;
+                isLevel3Unlocked = true;
+                break;
+
+            default:
                 break;
         }
 
@@ -161,8 +162,40 @@ public class GameManager : MonoBehaviour
 
             case 3:
                 return isLevel3Unlocked;
+
+            default:
+                break;
         }
 
         return false;
+    }
+
+
+
+    public void SetTruckStat(float speed, float fuel, int capacity, float collectRate)
+    {
+        truckSpeed = speed;
+        truckFuel = fuel;
+        truckMaxCapacity = capacity;
+        truckCollectRate = collectRate;
+    }
+
+
+    public float GetTruckSpeed()
+    {
+        return truckSpeed;
+    }
+    public float GetTruckFuel() 
+    { 
+        return truckFuel;
+    }
+    public int GetTruckMaxCapacity()
+    {
+        return truckMaxCapacity;
+    }
+
+    public float GetTruckCollectRate()
+    {
+        return truckCollectRate;
     }
 }

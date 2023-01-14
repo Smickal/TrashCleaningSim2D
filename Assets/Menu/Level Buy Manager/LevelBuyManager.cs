@@ -7,8 +7,8 @@ public class LevelBuyManager : MonoBehaviour
     GameManager gameManager;
     EconomySystem economySystem;
 
-
-    ErrorObjectPooling errorObjectPooling;
+    [SerializeField] SwipeMenu swipeMenu;
+    [SerializeField] GameObject levelCostLevel2;
 
     private void Awake()
     {
@@ -22,14 +22,18 @@ public class LevelBuyManager : MonoBehaviour
         economySystem.SetMoneyValue(gameManager.GetPlayerMoney());
     }
 
-    public void BuyThisLevel(int value)
+    public void BuyThisLevel()
     {
-        int levelCost = gameManager.GetLevelCost(value);
+        int currentLevel = swipeMenu.GetCurrentLevel() + 1;    
+        int levelCost = gameManager.GetLevelCost(currentLevel);
+
+        Debug.Log("CurrentLevel: " + currentLevel + ",LevelCost: " + levelCost);
 
 
-        if(economySystem.DecreaseMoney(levelCost))
+        if(economySystem.DecreaseMoney(levelCost) && !gameManager.CheckLevel(currentLevel))
         {
-            gameManager.ActivateLevel(value);
+            gameManager.ActivateLevel(currentLevel);
+            levelCostLevel2.SetActive(false);
         }
     }
 }
