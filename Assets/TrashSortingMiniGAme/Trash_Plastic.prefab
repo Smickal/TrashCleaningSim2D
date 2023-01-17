@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objImage:
-  - {fileID: 21300000, guid: b80545cc453eea543adf28b7c00e054b, type: 3}
-  - {fileID: 21300000, guid: 24454019736c87e46b81db72aed9fa42, type: 3}
-  - {fileID: 21300000, guid: 458ff1a7c4a8b7d43a0eaa3eb8e88968, type: 3}
-  - {fileID: 21300000, guid: 73fc02922220de341a3a47d3c652091e, type: 3}
+  - {fileID: 21300000, guid: 68ccec850d9b089459d83118adcf9026, type: 3}
+  - {fileID: 21300000, guid: 068b821bd0676ad4da89e77def838baf, type: 3}
   TrashType: 1

@@ -14,10 +14,12 @@ public class SwipeMenu : MonoBehaviour
 
     GameManager gameManager;
     [SerializeField] GameObject buyButton;
+    [SerializeField] GameObject playButton;
+
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
     }
     void Start()
     {
@@ -77,15 +79,27 @@ public class SwipeMenu : MonoBehaviour
         return posisi;
     }
 
-    private void CheckLevel()
+    public void CheckLevel()
     {
-        if(!gameManager.CheckLevel(posisi))
+        int currLvl = posisi + 1;
+
+        if(currLvl == 3)
         {
             buyButton.SetActive(false);
+            playButton.SetActive(false);
+            return;
+        }
+
+
+        if (gameManager.CheckLevel(currLvl))
+        {
+            buyButton.SetActive(false);
+            playButton.SetActive(true);
         }
         else
         {
             buyButton.SetActive(true);
+            playButton.SetActive(false);
         }
     
     }

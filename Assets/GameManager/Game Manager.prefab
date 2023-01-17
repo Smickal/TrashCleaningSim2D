@@ -45,7 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   day: 1
-  startingMoney: 1000
+  startingMoney: 100000
   retryCost: 500
   fuelCost: 200
+  repairCost: 200
   eachSessionLong: 5
+  isLevel1Unlocked: 1
+  level1Price: 0
+  isLevel2Unlocked: 0
+  level2Price: 1500
+  isLevel3Unlocked: 1
+  level3Price: 1500
+  truckSpeed: 10
+  truckFuel: 100
+  truckMaxCapacity: 10
+  truckCollectRate: 2

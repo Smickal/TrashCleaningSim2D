@@ -38,10 +38,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] float truckCollectRate = 2f;
 
     int currentDayMoney;
+    SaveSystem saveSystem;
 
 
 
-   
 
     private void Awake()
     {
@@ -49,14 +49,15 @@ public class GameManager : MonoBehaviour
         // LOAD MONEY FROM SAVE FILE
         currentDayMoney = startingMoney;
 
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this);
+            saveSystem = FindObjectOfType<SaveSystem>();
+        }
+        else
+        {
+            Destroy(gameObject);
         }
 
     }
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
 
     public int GetLevelCost(int value)
     {
-        switch(value)
+        switch (value)
         {
             case 1:
                 return level1Price;
@@ -180,13 +181,32 @@ public class GameManager : MonoBehaviour
         truckCollectRate = collectRate;
     }
 
+    public void SetTruckSpeed(float speed)
+    {
+        truckSpeed = speed;
+    }
+
+    public void SetTruckFuel(float fuel)
+    {
+        truckFuel = fuel;
+    }
+
+    public void SetTruckCapacity(int capacity)
+    {
+        truckMaxCapacity= capacity;
+    }
+
+    public void SetTruckCollectRate(float collectRate)
+    {
+        truckCollectRate= collectRate;
+    }
 
     public float GetTruckSpeed()
     {
         return truckSpeed;
     }
-    public float GetTruckFuel() 
-    { 
+    public float GetTruckFuel()
+    {
         return truckFuel;
     }
     public int GetTruckMaxCapacity()
@@ -198,4 +218,17 @@ public class GameManager : MonoBehaviour
     {
         return truckCollectRate;
     }
+
+
+    public void SetMoneyStat(int value)
+    {
+        startingMoney = value;
+    }
+
+    public void SetDayStat(int value)
+    {
+        day = value;
+    }
+
+    
 }

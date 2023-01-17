@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelBuyManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LevelBuyManager : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         economySystem = FindObjectOfType<EconomySystem>();
 
     }
@@ -35,5 +36,17 @@ public class LevelBuyManager : MonoBehaviour
             gameManager.ActivateLevel(currentLevel);
             levelCostLevel2.SetActive(false);
         }
+
+        swipeMenu.CheckLevel();
+
+        FindObjectOfType<SaveSystem>().SaveAll();
+
+
+    }
+
+    public void PlayThisLevel()
+    {
+        int curLevel = swipeMenu.GetCurrentLevel() + 1;
+        SceneManager.LoadScene(curLevel);
     }
 }

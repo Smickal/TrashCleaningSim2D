@@ -9,29 +9,25 @@ public class SpawnTrashSnap : MonoBehaviour
     [SerializeField] GameObject[] obj;
 
 
-    Transform[] allSpawnSpot;
-    TakeGarbage takeGarbage;
+    [SerializeField] Transform[] allSpawnSpot;
+    [SerializeField] TakeGarbage takeGarbage;
 
 
     bool[] spawned;
     int garbageCounted = 0;
 
 
-    private void Awake()
+
+    private void Start()
     {
-        allSpawnSpot = GetComponentsInChildren<Transform>();
-        takeGarbage = GetComponentInParent<TakeGarbage>();
-
-        spawned = new bool[allSpawnSpot.Length];
+        
     }
-
-    
 
     public void SpawnTrash()
     {
         int maxDump = takeGarbage.GetCurrentDump();
         int maxSpawnLoc = allSpawnSpot.Length;
-
+        spawned = new bool[allSpawnSpot.Length];
 
         int spawnedTrash = 0;
         while(spawnedTrash < maxDump)

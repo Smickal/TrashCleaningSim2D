@@ -21,7 +21,7 @@ public class SetTruckStat : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
 
         truckMovement = GetComponent<Movement>();
         truckTakeGarbage= GetComponent<TakeGarbage>();

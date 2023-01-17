@@ -28,7 +28,7 @@ public class WaypointManager : MonoBehaviour
         {
            randomIdx = Random.Range(0, waypoints.Length - 1);
 
-        }while(placeStamp[randomIdx] != 0);
+        }while(placeStamp[randomIdx] != 0 && waypoints[randomIdx].spawnable);
 
         placeStamp[randomIdx] = 1;
         //Debug.Log(waypoints[randomIdx]);

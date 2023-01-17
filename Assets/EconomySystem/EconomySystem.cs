@@ -12,16 +12,20 @@ public class EconomySystem : MonoBehaviour
     [SerializeField] ErrorObjectPooling cashNotEnoughError;
 
     [SerializeField] MoneyCounter moneyCounter;
-    GameManager gameManager;
+    [SerializeField] GameManager gameManager;
+
     private void Awake()
     {
         if(!moneyCounter) moneyCounter = FindObjectOfType<MoneyCounter>();
-        gameManager = FindObjectOfType<GameManager>();
+        
     }
 
 
     private void Start()
     {
+        gameManager = GameManager.instance;
+
+        Debug.Log(GameManager.instance.GetPlayerMoney());
         playerMoney = gameManager.GetPlayerMoney();
         moneyCounter.UpdateText(playerMoney);
     }
@@ -35,6 +39,9 @@ public class EconomySystem : MonoBehaviour
         }
         playerMoney -= value;
         moneyCounter.UpdateText(playerMoney);
+        gameManager.SetMoneyStat(playerMoney);
+        FindObjectOfType<SaveSystem>().SaveAll();
+
         return true;
     }
 
@@ -42,6 +49,8 @@ public class EconomySystem : MonoBehaviour
     {
         playerMoney += value;
         moneyCounter.UpdateText(playerMoney);
+        GameManager.instance.SetMoneyStat(playerMoney);
+        FindObjectOfType<SaveSystem>().SaveAll();
     }
 
     public bool IsMoneyEnough(int value)

@@ -9,24 +9,32 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] GameObject settingContainer;
     [SerializeField] GameObject MapSelectionUpgrade;
 
+    [Header("Animator")]
+    [SerializeField] Animator menuAnim;
+    [SerializeField] Animator MapSelectionAnim;
+
 
     public void EnableSettingContainer()
     {
         menuContainer.SetActive(false);
         settingContainer.SetActive(true);
-        MapSelectionUpgrade.SetActive(false);
+    }
+
+    public void EnableMenuFromSetting()
+    {
+        menuContainer.SetActive(true);
+        settingContainer.SetActive(false);
     }
 
     public void EnableMainMenuContainer()
     {
-        menuContainer.SetActive(true);
-        settingContainer.SetActive(false);
-        MapSelectionUpgrade.SetActive(false);
+        menuAnim.SetTrigger("TriggerMenu");
+        MapSelectionAnim.SetTrigger("TriggerMenu");
     }
 
     public void EnableMapSelection()
     {
-        menuContainer.SetActive(false);
-        MapSelectionUpgrade.SetActive(true);
+        menuAnim.SetTrigger("TriggerPlay");
+        MapSelectionAnim.SetTrigger("TriggerPlay");
     }
 }

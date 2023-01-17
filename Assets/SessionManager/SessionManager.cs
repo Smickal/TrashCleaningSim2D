@@ -20,14 +20,22 @@ public class SessionManager : MonoBehaviour
 
     private void Awake()
     {
-        InitializeInNewMap();
+        
 
         
     }
     void Start()
     {
+        InitializeInNewMap();
         SetRetryCostText();
-        ResetDaySession();
+        //ResetDaySession();
+
+        dayAnim.StartDay(gameManager.GetDayValue());
+        timer.ResetCurrentSession();
+        player.position = startingPosition.position;
+        player.rotation = startingPosition.rotation;
+        carSpawner.DespawnCar();
+        carSpawner.SpawnTrafficCar();
     }
 
     // Update is called once per frame
@@ -90,7 +98,7 @@ public class SessionManager : MonoBehaviour
 
     public void InitializeInNewMap()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         player = FindObjectOfType<Movement>().transform;
         startingPosition = FindObjectOfType<StartingPosition>().transform;
         economySystem = FindObjectOfType<EconomySystem>();
