@@ -24,6 +24,7 @@ public class PopUpController : MonoBehaviour
     {           
         popUpPrefab.SetActive(true);
         popUpAnimator.SetTrigger("TriggerPop");
+        FindObjectOfType<AudioManager>().PlaySound("Alert");
     }
 
 

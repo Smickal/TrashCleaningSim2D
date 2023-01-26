@@ -14,12 +14,13 @@ public class SaveDetection : MonoBehaviour
 
     private void Awake()
     {
-        saveSystem = FindObjectOfType<SaveSystem>();
-
-        CheckSaveFiles();
+        saveSystem = FindObjectOfType<SaveSystem>(); 
     }
 
-
+    private void Start()
+    {
+        CheckSaveFiles();
+    }
     public void CheckSaveFiles()
     {
         Button newgameBtn = newGamebutton.GetComponent<Button>();

@@ -37,14 +37,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] int truckMaxCapacity = 10;
     [SerializeField] float truckCollectRate = 2f;
 
+    [Header("Upgrade Stat")]
+    [SerializeField] int speedCounter = 0;
+    [SerializeField] int fuelCounter = 0;
+    [SerializeField] int capacityCounter = 0;
+    [SerializeField] int collectRateCounter = 0;
+
     int currentDayMoney;
     SaveSystem saveSystem;
 
-
+    int baseDay, baseStartingMoney,baseSpeedCounter, baseFuelCounter, baseCapacityCounter, baseCollectRateCounter;
+    float baseTruckSpeed, baseTruckFuel, baseTruckCollectRate;
+    int baseMaxCapacity;
 
 
     private void Awake()
     {
+        SaveBase();
         //TO BE ADDED
         // LOAD MONEY FROM SAVE FILE
         currentDayMoney = startingMoney;
@@ -230,5 +239,64 @@ public class GameManager : MonoBehaviour
         day = value;
     }
 
+    public int GetSpeedUpgradeCounter()
+    {
+        return speedCounter;
+    }
+
+    public int GetFuelUpgradeCounter()
+    {
+        return fuelCounter;
+    }
     
+    public int GetCapacityUpgradeCounter()
+    {
+        return capacityCounter;
+    }
+
+    public int GetCollectRateUpgradeCounter()
+    {
+        return collectRateCounter;
+    }
+
+    public void SetSpeedCounter(int value)
+    { speedCounter = value; }
+    public void SetFuelCounter(int value) 
+    { fuelCounter = value;}
+    public void SetCapacityCounter(int value)
+    { capacityCounter = value;}
+    public void SetCollectRateCounter(int value)
+    { collectRateCounter = value;}
+
+    private void SaveBase()
+    {
+        baseDay = day;
+        baseStartingMoney= startingMoney;
+
+        baseSpeedCounter= speedCounter;
+        baseFuelCounter= fuelCounter;
+        baseCapacityCounter= capacityCounter;
+        baseCollectRateCounter = collectRateCounter;
+
+        baseTruckSpeed = truckSpeed;
+        baseTruckFuel= truckFuel;
+        baseMaxCapacity = truckMaxCapacity;
+        baseTruckCollectRate = truckCollectRate;
+    }
+
+    public void LoadBase()
+    {
+        day = baseDay;
+        startingMoney = baseStartingMoney;
+
+        speedCounter = 0;
+        fuelCounter = 0;
+        capacityCounter = 0;
+        collectRateCounter = 0;
+
+        truckSpeed = baseTruckSpeed;
+        truckFuel = baseTruckFuel;
+        truckMaxCapacity = baseMaxCapacity;
+        truckCollectRate = baseTruckCollectRate;
+    }
 }

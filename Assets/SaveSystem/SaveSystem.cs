@@ -12,11 +12,11 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] MoneyCounter moneyCounter;
     [SerializeField] DayCounter dayCounter;
     [SerializeField] DisplayTruckStat displayTruckStat;
-
+    [SerializeField] UpgradeSystem upgradeSystem;
 
     float truckSpeed, truckFuel, truckRate;
     int truckCapacity, money, day;
-    
+    int speedCounter, fuelCounter, capacityCounter, rateCounter;
 
     private void Awake()
     {
@@ -54,11 +54,44 @@ public class SaveSystem : MonoBehaviour
         PlayerPrefs.SetInt("Day", day);
         PlayerPrefs.Save();
     }
+
+    public void SaveSpeedCounter()
+    {
+        var speedCounter = gameManager.GetSpeedUpgradeCounter();
+
+        PlayerPrefs.SetInt("SpeedCounter", speedCounter);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveFuelCounter()
+    {
+        var fuelCounter = gameManager.GetFuelUpgradeCounter();
+
+        PlayerPrefs.SetInt("FuelCounter", fuelCounter);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveCapacityCounter()
+    {
+        var capacityCounter = gameManager.GetCapacityUpgradeCounter();
+
+        PlayerPrefs.SetInt("CapacityCounter", capacityCounter);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveRateCounter()
+    {
+        var rateCounter = gameManager.GetCollectRateUpgradeCounter();
+
+        PlayerPrefs.SetInt("RateCounter", rateCounter);
+        PlayerPrefs.Save();
+    }
     
     public bool CheckFileExist()
     {
         if(PlayerPrefs.HasKey("TruckSpeed"))
         {
+            LoadSaveFiles();
             display();
             return true;
         }
@@ -72,8 +105,8 @@ public class SaveSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Speed: " + PlayerPrefs.GetFloat("TruckSpeed"));
-        Debug.Log("Money: " + PlayerPrefs.GetInt("Money"));
+        //Debug.Log("Speed: " + PlayerPrefs.GetFloat("TruckSpeed"));
+        //Debug.Log("Money: " + PlayerPrefs.GetInt("Money"));
     }
 
     public void LoadSaveFiles()
@@ -93,6 +126,19 @@ public class SaveSystem : MonoBehaviour
         //load day
         day = PlayerPrefs.GetInt("Day");
         gameManager.SetDayStat(day);
+
+        //load UpgradeCounters
+        speedCounter = PlayerPrefs.GetInt("SpeedCounter");
+        fuelCounter = PlayerPrefs.GetInt("FuelCounter");
+        capacityCounter = PlayerPrefs.GetInt("CapacityCounter");
+        rateCounter = PlayerPrefs.GetInt("RateCounter");
+        
+        gameManager.SetSpeedCounter(speedCounter);
+        gameManager.SetFuelCounter(fuelCounter);
+        gameManager.SetCapacityCounter(capacityCounter);
+        gameManager.SetCollectRateCounter(rateCounter);
+
+
     }
 
     public void display()
@@ -113,9 +159,20 @@ public class SaveSystem : MonoBehaviour
     public void CreateNewSave()
     {
         PlayerPrefs.DeleteAll();
-        
+
+        GameManager.instance.LoadBase();
+
         SaveMoney();
         SaveTruckStat();
         SaveDay();
+        SaveSpeedCounter();
+        SaveFuelCounter();
+        SaveCapacityCounter();
+        SaveRateCounter();
+
+        LoadSaveFiles();
+        display();
+        upgradeSystem.SetUpgradeStat();
+        upgradeSystem.DisplayAllUpgradeCounter();
     }
 }

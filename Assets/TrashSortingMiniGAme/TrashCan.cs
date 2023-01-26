@@ -30,19 +30,19 @@ public class TrashCan : MonoBehaviour
 
 
         //Debug.Log(trashType);
-
-        if(type == trashType)
+        if (type == trashType)
         {
             //Accept Trash
             takeGarbage.IncreaseGarbageCounted();
+            FindObjectOfType<AudioManager>().PlaySound("TrashAccept");
             Destroy(collision.gameObject, 0.2f);
             StartCoroutine(AcceptTrash());
-
         }
         else
         {
             //Denied Trash
             collision.GetComponent<DragBehaviour>().ResetPosition();
+            FindObjectOfType<AudioManager>().PlaySound("TrashDenied");
         }
     }
 

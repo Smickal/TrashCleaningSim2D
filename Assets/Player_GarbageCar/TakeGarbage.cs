@@ -125,6 +125,8 @@ public class TakeGarbage : MonoBehaviour
             economySystem.AddMoney(trashMoneyValue);
             garbageCounter.UpdateText(currentDump);
             curPressTime = 0f;
+            FindObjectOfType<AudioManager>().StopPlaying("SortTrash");
+            FindObjectOfType<AudioManager>().PlaySound("PickupTrash");
         }
     }
 

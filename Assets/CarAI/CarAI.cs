@@ -34,6 +34,7 @@ public class CarAI : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<Movement>().TriggerPopOutRepair();
+            FindObjectOfType<AudioManager>().PlaySound("CarCrash");
             Debug.Log("HIT PLAYER");
         }
 

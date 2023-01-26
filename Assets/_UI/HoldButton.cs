@@ -9,6 +9,7 @@ public class HoldButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     public UnityEvent unityEventDown;
     public UnityEvent unityEventUp;
 
+    [SerializeField] string sfxString = "SortTrash";
     bool isPressed = false;
 
     private void OnEnable()
@@ -18,13 +19,15 @@ public class HoldButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {       
-        isPressed = true;        
+        isPressed = true;
+        FindObjectOfType<AudioManager>().PlaySound(sfxString);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         isPressed = false;
         
+
     }
 
     private void Update()

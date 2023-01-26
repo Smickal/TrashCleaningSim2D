@@ -12,7 +12,7 @@ public class EconomySystem : MonoBehaviour
     [SerializeField] ErrorObjectPooling cashNotEnoughError;
 
     [SerializeField] MoneyCounter moneyCounter;
-    [SerializeField] GameManager gameManager;
+    GameManager gameManager;
 
     private void Awake()
     {
@@ -34,7 +34,8 @@ public class EconomySystem : MonoBehaviour
     public bool DecreaseMoney(int value)
     {
         if (!IsMoneyEnough(value))
-        {           
+        {
+            FindObjectOfType<AudioManager>().PlaySound("ErrorNoMoney");
             return false;
         }
         playerMoney -= value;

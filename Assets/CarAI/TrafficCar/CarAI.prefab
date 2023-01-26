@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46913c5515c49a6458fe7930fcbbb493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 15
   rotationSpeed: 20
   rayCarRange: 0.1
   careye: {fileID: 4761822626847568984}

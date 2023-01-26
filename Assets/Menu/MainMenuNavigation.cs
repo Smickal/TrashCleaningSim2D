@@ -13,6 +13,12 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] Animator menuAnim;
     [SerializeField] Animator MapSelectionAnim;
 
+    private void Start()
+    {
+        FindObjectOfType<CarSpawner>().SpawnTrafficCar();
+    }
+
+
 
     public void EnableSettingContainer()
     {

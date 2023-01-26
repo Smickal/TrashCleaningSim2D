@@ -7,6 +7,7 @@ using UnityEngine;
 public class TrafficLightSystem4 : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header("light")]
     //Light_1
     [SerializeField] TextMeshPro textLight1;
     //Light_2
@@ -19,6 +20,18 @@ public class TrafficLightSystem4 : MonoBehaviour
     [SerializeField] float trafficCountdown = 10f;
     [SerializeField] float offset = 0.2f;
     [SerializeField] LayerMask carAILayer;
+
+
+    [Header("Sprite")]
+    [SerializeField] Sprite redLight;
+    [SerializeField] Sprite yellowLight;
+    [SerializeField] Sprite greenLight;
+
+    [Header("SpriteRenderer")]
+    [SerializeField] SpriteRenderer pos1;
+    [SerializeField] SpriteRenderer pos2;
+    [SerializeField] SpriteRenderer pos3;
+    [SerializeField] SpriteRenderer pos4;
 
     BoxCollider2D[] allLaneCol;
 
@@ -114,6 +127,13 @@ public class TrafficLightSystem4 : MonoBehaviour
             light3 = false;
             light4 = false;
 
+            pos1.sprite = greenLight;
+            pos2.sprite = redLight;
+            pos3.sprite = redLight;
+            pos4.sprite = redLight;
+
+
+
         }
         else if (num == 2)
         {
@@ -126,6 +146,11 @@ public class TrafficLightSystem4 : MonoBehaviour
             light2 = true;
             light3 = false;
             light4 = false;
+
+            pos1.sprite = redLight;
+            pos2.sprite = greenLight;
+            pos3.sprite = redLight;
+            pos4.sprite = redLight;
         }
         else if(num == 3)
         {
@@ -138,6 +163,11 @@ public class TrafficLightSystem4 : MonoBehaviour
             light2 = false;
             light3 = true;
             light4 = false;
+
+            pos1.sprite = redLight;
+            pos2.sprite = redLight;
+            pos3.sprite = greenLight;
+            pos4.sprite = redLight;
         }
         else if(num == 4)
         {
@@ -150,6 +180,11 @@ public class TrafficLightSystem4 : MonoBehaviour
             light2 = false;
             light3 = false;
             light4 = true;
+
+            pos1.sprite = redLight;
+            pos2.sprite = redLight;
+            pos3.sprite = redLight;
+            pos4.sprite = greenLight;
         }
     }
 

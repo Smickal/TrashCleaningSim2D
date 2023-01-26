@@ -226,4 +226,9 @@ public class Movement : MonoBehaviour
     {
         this.speed = speed;
     }
+
+    public float GetVerticalaxis()
+    {
+        return verticalAxis;
+    }
 }

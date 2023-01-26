@@ -9,21 +9,27 @@ public class Lane : MonoBehaviour
     [SerializeField] LayerMask carLayer;
     [SerializeField] bool isLane4System = false;
 
+    float carSpeed;
+
     TrafficLightSystem3 tlSystem3;
     TrafficLightSystem4 tlSystem4;
+
+    Movement carMove;
     private void Awake()
     {
         if (!isLane4System)
             tlSystem3 = GetComponentInParent<TrafficLightSystem3>();
         else
             tlSystem4 = GetComponentInParent<TrafficLightSystem4>();
+
+
+        carMove = FindObjectOfType<Movement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<CarAI>())
         {
-            Debug.Log("car");
             if(!isLane4System)
             {
                 if (tlSystem3.IsThisLaneActivated(laneNum))
@@ -50,5 +56,26 @@ public class Lane : MonoBehaviour
 
             
         }
+
+        Movement mov;
+
+        if (collision.GetComponent<Movement>())
+        {
+            mov = collision.GetComponent<Movement>();
+            //if lane stop and car moved <-- punishment
+            Debug.Log(mov.GetVerticalaxis() + " " + tlSystem3.IsThisLaneActivated(laneNum));
+            if (!tlSystem3.IsThisLaneActivated(laneNum) && Mathf.Abs(carSpeed) > 0f)
+            {
+                FindObjectOfType<EconomySystem>().DecreaseMoney(20);
+                FindObjectOfType<AudioManager>().PlaySound("TrafficViolation");
+                Debug.Log("decresead money");
+            }
+        }
+    }
+
+
+    private void Update()
+    {
+        carSpeed = carMove.GetVerticalaxis();
     }
 }

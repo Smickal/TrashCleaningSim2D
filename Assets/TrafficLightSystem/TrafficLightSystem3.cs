@@ -7,6 +7,12 @@ using System.Runtime.InteropServices.WindowsRuntime;
 public class TrafficLightSystem3 : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] float trafficCountdown = 10f;
+    [SerializeField] float offset = 0.2f;
+    [SerializeField] LayerMask carAILayer;
+
+
+    [Header("Text")]
     //Light_1
     [SerializeField] TextMeshPro textLight1;
     //Light_2
@@ -14,9 +20,17 @@ public class TrafficLightSystem3 : MonoBehaviour
     //light3
     [SerializeField] TextMeshPro textLight3;
 
-    [SerializeField] float trafficCountdown = 10f;
-    [SerializeField] float offset = 0.2f;
-    [SerializeField] LayerMask carAILayer;
+    [Header("Sprite")]
+    [SerializeField] Sprite redLight;
+    [SerializeField] Sprite yellowLight;
+    [SerializeField] Sprite greenLight;
+
+    [Header("SpriteRenderer")]
+    [SerializeField] SpriteRenderer pos1;
+    [SerializeField] SpriteRenderer pos2;
+    [SerializeField] SpriteRenderer pos3;
+
+
     BoxCollider2D[] allLaneCol;
 
     int curLightIdx = 0;
@@ -113,6 +127,11 @@ public class TrafficLightSystem3 : MonoBehaviour
             light1 = true;
             light2 = false;
             light3 = false;
+
+            pos1.sprite = greenLight;
+            pos2.sprite = redLight;
+            pos3.sprite = redLight;
+
         }
         else if(num == 2)
         {
@@ -123,6 +142,11 @@ public class TrafficLightSystem3 : MonoBehaviour
             light1 = false;
             light2 = true;
             light3 = false;
+
+            pos1.sprite = redLight;
+            pos2.sprite = greenLight;
+            pos3.sprite = redLight;
+
         }
         else if(num ==3)
         {
@@ -133,6 +157,10 @@ public class TrafficLightSystem3 : MonoBehaviour
             light1 = false;
             light2 = false;
             light3 = true;
+
+            pos1.sprite = redLight;
+            pos2.sprite = redLight;
+            pos3.sprite = greenLight;
         }
     }
 
