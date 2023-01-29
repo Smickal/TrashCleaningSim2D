@@ -43,4 +43,9 @@ public class MainMenuNavigation : MonoBehaviour
         menuAnim.SetTrigger("TriggerPlay");
         MapSelectionAnim.SetTrigger("TriggerPlay");
     }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
+    }
 }

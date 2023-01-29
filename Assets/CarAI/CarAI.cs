@@ -1,10 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -115,7 +110,7 @@ public class CarAI : MonoBehaviour
     {
         if (!move) return;
         float distance = Vector2.Distance(nextTarget.transform.position, transform.position);
-        if (distance <= 0.1f)
+        if (distance <= 0.25f)
         {
             //update new target
             currPos = nextTarget;

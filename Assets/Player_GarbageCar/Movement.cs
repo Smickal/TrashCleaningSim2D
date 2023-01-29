@@ -1,4 +1,3 @@
-using Mono.Cecil.Cil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,9 +40,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetKeyBoardMovement();
-       // GetButtonVerticalMovement();
-       // GetButtonHorizontalMovement();
+       // GetKeyBoardMovement();
+       GetButtonVerticalMovement();
+        GetButtonHorizontalMovement();
 
         if(!isFuelEmpty)
         {
