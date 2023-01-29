@@ -16,6 +16,7 @@ public class SessionManager : MonoBehaviour
     Transform startingPosition;
     EconomySystem economySystem;
     FuelSystem fuelSystem;
+    TakeGarbage takeGarbage;
     Timer timer;
 
     private void Awake()
@@ -62,9 +63,11 @@ public class SessionManager : MonoBehaviour
         timer.ResetCurrentSession();
 
         //respawn car
-
         carSpawner.DespawnCar();
         carSpawner.SpawnTrafficCar();
+
+        //Reset Capacity
+        takeGarbage.ResetTrashCount();
 
         
 
@@ -103,6 +106,7 @@ public class SessionManager : MonoBehaviour
         startingPosition = FindObjectOfType<StartingPosition>().transform;
         economySystem = FindObjectOfType<EconomySystem>();
         fuelSystem = FindObjectOfType<FuelSystem>();
+        takeGarbage = FindObjectOfType<TakeGarbage>();
         timer = FindObjectOfType<Timer>();
 
 

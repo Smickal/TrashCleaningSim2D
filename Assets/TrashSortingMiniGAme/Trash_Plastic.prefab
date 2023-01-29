@@ -154,4 +154,5 @@ MonoBehaviour:
   objImage:
   - {fileID: 21300000, guid: 68ccec850d9b089459d83118adcf9026, type: 3}
   - {fileID: 21300000, guid: 068b821bd0676ad4da89e77def838baf, type: 3}
+  - {fileID: 21300000, guid: 1e4635128ffe54941be4140a40b368e0, type: 3}
   TrashType: 1

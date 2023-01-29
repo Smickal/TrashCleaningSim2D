@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class TakeGarbage : MonoBehaviour
@@ -128,6 +129,11 @@ public class TakeGarbage : MonoBehaviour
             FindObjectOfType<AudioManager>().StopPlaying("SortTrash");
             FindObjectOfType<AudioManager>().PlaySound("PickupTrash");
         }
+    }
+
+    public void ResetTrashCount()
+    {
+        currentDump = 0;
     }
 
     private void OnDrawGizmosSelected()
